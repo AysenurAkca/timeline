@@ -5,75 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/b6ef7650fd.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/style.css">
     <title>Main | <%=title%>
     </title>
-    <style>
-        * {
-            padding: 0;
-            margin: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        form{
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin-top: 15px;
-        }
-        .header {
-            width: 60%;
-            height: 70px;
-            padding: 20px;
-            background-color: #ccc;
-            font-size: 25px;
-            display: flex;
-            align-items: center;
-            justify-content: space-around;
-        }
-
-        .header input {
-            width: 500px;
-        }
-
-        .header input,
-        button {
-            padding: 5px 8px;
-        }
-
-        .headericons {
-            width: 20%;
-            display: flex;
-            justify-content: space-around;
-        }
-        #get-post, #posts{
-            width: 60%;
-            
-        }
-        #title, #review{
-            width: 100%;
-            padding: 10px 20px;
-        }
-        #get-post-btn{
-            width: 25%;
-            align-self: flex-end;
-            color: white;
-            background-color: blue;
-        }
-        #post-ares{
-            text-indent: 50px;
-        }
-        #timeline{
-            padding: 10px;
-            border: 1px solid #ccc;
-            font-size: 20px;
-            width: 60%;
-        }
-    </style>
+   
 </head>
 
 <body>
@@ -101,12 +36,19 @@
 
     <div id="posts">
         <div id="one-post">
-            <% for(let i =0; i< posts.length; i++){ %>
-                <p><b><%= posts[i].title %> - <%= posts[i].created_at %></b></p>
+            <% posts.forEach(post =>{ %>
+                <p><b><%= post.title %> - <%= post.created_at %></b></p>
                 <div>
-                    <p id="post-text" style="padding-left: 20px; margin-bottom: 25px;"><%= posts[i].review %></p>
+                    <p id="post-text" style="padding-left: 20px; margin-bottom: 25px;"><%= post.review %></p>
                 </div>
-            <% } %>
+                <form action="/posts/<%=post._id%>/delete" method="post"> <button id="delete">Delete</button></form>
+                <form action="/posts/<%=post._id%>/edit" method="post"> <button id="edit">Edit</button></form>
+                <form action="/posts/<%=post._id%>/comment" method="post"> <button id="comment">Comment</button></form>
+                <% post.comments.forEach(comment => { %>
+                    <p><b><%=comment.name %></b> - <%= comment.comment %></p>
+                    
+                <% }) %>
+            <% }) %>
         </div>
     </div>
 

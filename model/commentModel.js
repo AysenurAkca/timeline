@@ -1,30 +1,29 @@
 const mongoose = require('mongoose')
-const Schema = mongoose.Schema;
 const moment = require('moment/moment')
 
-const postSchema = new Schema({
-    title:{
-        type : String,
-        required : true
+const commentSchema = new mongoose.Schema({
+    name : {
+        type: String,
+        required :true
     },
-    review:{
+    comment:{
         type : String,
         required : true,
     }, 
+    post_id:{
+        type : mongoose.Schema.Types.ObjectId,
+        ref : 'Post'
+    },
     created_at:{
         type: Date,
         default : Date.now,
         get: function (createAt) {
             return moment(createAt).format('MMMM Do YYYY')
         }
-    },
-    comments: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Comment'
-    }]
-    
+
+    }
 
 
 },{timestamps: true})
 
-module.exports = mongoose.model('Post', postSchema);
+module.exports = mongoose.model('Comment', commentSchema);
