@@ -4,10 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        body{
+            width: 80%;
+            margin: 20px auto;
+        }
+    </style>
 </head>
 <body>
+    <h1>Edit Page</h1>
     <form action="/posts/<%= post._id %>/update" method="post">
-        <input type="text" name="title" id="title" value="<%= post.title %>" required>
+        
         <textarea name="review" id="review" rows="10" cols="30" minlength="25"><%= post.review %></textarea >
         <button type="submit">Update</button>
     </form>
