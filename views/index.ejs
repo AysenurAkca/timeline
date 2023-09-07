@@ -27,9 +27,10 @@
     </div>
     <div id="timeline">
         Timeline
+        <p>Hello <%= firstname %></p>
     </div>
+    <a href="/logout-user">Log out</a>
     <form action="/create-post" method="POST" id="get-post">
-        <input type="text" name="title" id="title" placeholder="Your full name" required>
         <textarea name="review" id="review" rows="10" cols="30" minlength="25" placeholder="Type your message here" required></textarea >
         <button type="submit" id="get-post-btn">Post a message</button>
     </form>
@@ -37,15 +38,15 @@
     <div id="posts">
         <div id="one-post">
             <% posts.forEach(post =>{ %>
-                <p><b><%= post.title %> - <%= post.created_at %></b></p>
+                <p><b><%= post.user_id.firstname %>-<%= post.created_at %></b></p>
                 <div>
                     <p id="post-text" style="padding-left: 20px; margin-bottom: 25px;"><%= post.review %></p>
                 </div>
                 <form action="/posts/<%=post._id%>/delete" method="post"> <button id="delete">Delete</button></form>
                 <form action="/posts/<%=post._id%>/edit" method="post"> <button id="edit">Edit</button></form>
-                <form action="/posts/<%=post._id%>/comment" method="post"> <button id="comment">Comment</button></form>
+                <form action="/posts/<%=post._id%>/comment"> <button id="comment">Comment</button></form>
                 <% post.comments.forEach(comment => { %>
-                    <p><b><%=comment.name %></b> - <%= comment.comment %></p>
+                    <p><b><%= comment.user_id.firstname %></b> - <%= comment.comment %></p>
                     
                 <% }) %>
             <% }) %>

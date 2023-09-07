@@ -3,6 +3,8 @@ const route = require('./config/routes')
 require('./config/mongoose')
 require('dotenv').config()
 const app = express()
+var cookieParser = require('cookie-parser')
+app.use(cookieParser())
 app.set('view engine', 'ejs')
 app.use(express.urlencoded({extended: false}))
 

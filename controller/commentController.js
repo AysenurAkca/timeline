@@ -9,9 +9,9 @@ const createComment = async(req,res)=>{
 
 const addComment =async (req,res)=> {
     const comment = new Comment({
-        name : req.body.name,
         comment : req.body.comment,
-        post_id : req.params.id
+        post_id : req.params.id,
+        user_id : res.locals.id
     })
     await comment.save()
     const commentedPost = await Post.findById(req.params.id)

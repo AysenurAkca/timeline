@@ -2,10 +2,6 @@ const mongoose = require('mongoose')
 const moment = require('moment/moment')
 
 const commentSchema = new mongoose.Schema({
-    name : {
-        type: String,
-        required :true
-    },
     comment:{
         type : String,
         required : true,
@@ -13,6 +9,10 @@ const commentSchema = new mongoose.Schema({
     post_id:{
         type : mongoose.Schema.Types.ObjectId,
         ref : 'Post'
+    },
+    user_id:{
+        type : mongoose.Schema.Types.ObjectId,
+        ref : 'User'
     },
     created_at:{
         type: Date,

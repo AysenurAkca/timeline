@@ -12,8 +12,6 @@
         <p id="post-text" style="padding-left: 20px; margin-bottom: 25px;"><%= posts.review %></p>
     </div>
    <form action="/posts/<%= posts._id %>/addComment" method="post">
-    <label for="name">Your name:</label>
-    <input type="text" name="name" id="name">
     <textarea name="comment" id="comment" cols="70" rows="10" placeholder="Write your comment here"></textarea>
     <button>Add Comment</button>
    </form>
