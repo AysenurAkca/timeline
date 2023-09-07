@@ -7,7 +7,16 @@ const getPosts = (req,res) => {
     Post.find()
     .populate("comments","user_id comment")
     .populate("user_id", "firstname")
-    // .populate({path: 'comments', populate:{path: 'user_id', populate : {path:'firstname'}}})
+    
+    .populate({
+    path: 'comments',
+    model: 'Comment',
+    populate: {
+        path: 'user_id',
+        model: 'User'
+    }
+    })
+    
     .sort({created_at : -1})
     .then((result) => res.render('index', {posts : result, title: 'Posts'}) )
     .catch((err)=> console.log(err))
